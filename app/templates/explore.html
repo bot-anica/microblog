@@ -6,4 +6,7 @@
   {% for post in posts %}
     {% include "_post.html" %}
   {% endfor %}
+
+  <a href="{{ prev_url }}" class="{{ prev_url and 'link' or 'link_disabled' }}">Newer posts</a>
+  <a href="{{ next_url }}" class="{{ next_url and 'link' or 'link_disabled' }}">Older posts</a>
 {% endblock %}
