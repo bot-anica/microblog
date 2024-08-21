@@ -8,6 +8,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login
 
 
+def lazy_utc_now():
+    return datetime.now(tz=timezone.utc)
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -27,7 +31,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
-    last_seen = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    last_seen = db.Column(db.DateTime, default=lazy_utc_now)
     followed = db.relationship(
         'User',
         secondary=followers,
@@ -74,7 +78,7 @@ class User(UserMixin, db.Model):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.now(timezone.utc))
+    timestamp = db.Column(db.DateTime, index=True, default=lazy_utc_now)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
