@@ -89,3 +89,25 @@ Instance: /Users/kostasavcenko/PycharmProjects/microblog/instance
 >>> db
 <SQLAlchemy sqlite:////Users/kostasavcenko/PycharmProjects/microblog/app.db>
 ```
+---
+## Назначение переменных окружения для отправки писем на почту
+
+⚠️ **Google не пропускает отправку писем, поэтому используем другие почты, например, Outlook**
+
+```shell
+export MAIL_SERVER=smtp-mail.outlook.com
+```
+```shell
+export MAIL_PORT=587
+```
+```shell
+export MAIL_USE_TLS=1
+```
+```shell
+export MAIL_USERNAME=your-mail@outlook.com
+```
+```shell
+export MAIL_PASSWORD=your-password
+```
+
+⚠️ Не забываем указать **your-mail@outlook.com** в переменной **ADMINS** в **config.py**
