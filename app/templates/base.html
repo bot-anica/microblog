@@ -5,35 +5,19 @@
     {% else %}
       <title>Welcome to Microblog</title>
     {% endif %}
+    <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }}>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/tailwind_config.js') }}"></script>
   </head>
   <body>
-    <div>
-      Microblog:
-      <a href="{{ url_for('index') }}">Home</a>
-      {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-      {% else %}
-        <a href="{{ url_for('explore') }}">Explore</a>
-        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-      {% endif %}
+    {% include "_header.html" %}
+
+    {% include "_flashed_messages.html" %}
+
+    <div class="px-8">
+      <div class="mx-auto max-w-7xl">
+        {% block content %}{% endblock %}
+      </div>
     </div>
-    <hr>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-
-    {% block content %}{% endblock %}
   </body>
 </html>
-
-{% block scripts %}
-  <link rel="stylesheet" href={{ url_for('static', filename='css/styles.css') }}>
-{% endblock %}

@@ -28,7 +28,7 @@ def index():
         post = Post(body=form.post.data, author=current_user)
         db.session.add(post)
         db.session.commit()
-        flash('Your post is now live!')
+        flash('Your post is now live!', 'info')
         return redirect(url_for('index'))
 
     page = request.args.get('page', 1, type=int)
@@ -63,7 +63,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
 
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
             return redirect(url_for('login'))
 
         login_user(user, remember=form.remember_me.data)
@@ -94,7 +94,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash('Congratulations, you are now a registered user!', 'warning')
         return redirect(url_for('login'))
 
     return render_template('register.html', title='Register', form=form)
@@ -103,6 +103,7 @@ def register():
 @app.route("/user/<username>")
 @login_required
 def user(username):
+    print(username)
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
@@ -120,7 +121,7 @@ def edit_profile():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
         db.session.commit()
-        flash('Your changes have been saved.')
+        flash('Your changes have been saved.', 'info')
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -134,16 +135,16 @@ def follow(username):
     user = User.query.filter_by(username=username).first()
 
     if user is None:
-        flash(f'User {username} not found.')
+        flash(f'User {username} not found.', 'error')
         return redirect(url_for('index'))
 
     if user == current_user:
-        flash('You cannot follow yourself!')
+        flash('You cannot follow yourself!', 'error')
         return redirect(url_for('user', username=username))
 
     current_user.follow(user)
     db.session.commit()
-    flash(f'You are following {username}!')
+    flash(f'You are following {username}!', 'info')
     return redirect(url_for('user', username=username))
 
 
@@ -153,16 +154,16 @@ def unfollow(username):
     user = User.query.filter_by(username=username).first()
 
     if user is None:
-        flash(f'User {username} not found.')
+        flash(f'User {username} not found.', 'error')
         return redirect(url_for('index'))
 
     if user == current_user:
-        flash('You cannot unfollow yourself!')
+        flash('You cannot unfollow yourself!', 'error')
         return redirect(url_for('user', username=username))
 
     current_user.unfollow(user)
     db.session.commit()
-    flash(f'You are not following {username}.')
+    flash(f'You are not following {username}.', 'info')
     return redirect(url_for('user', username=username))
 
 
@@ -179,7 +180,7 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
 
-        flash('Check your email for the instructions to reset your password.')
+        flash('Check your email for the instructions to reset your password.', 'info')
         return redirect(url_for('login'))
 
     return render_template('reset_password_request.html', title='Reset Password', form=form)
@@ -200,7 +201,7 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.')
+        flash('Your password has been reset.', 'info')
         return redirect(url_for('login'))
 
     return render_template('reset_password.html', form=form)
