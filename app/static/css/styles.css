@@ -1,6 +1,0 @@
-a.link_disabled {
-    pointer-events: none;
-    cursor: not-allowed;
-    opacity: 0.5;
-    text-decoration: none;
-}

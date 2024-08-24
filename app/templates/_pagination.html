@@ -1,0 +1,5 @@
+<div class="flex justify-center gap-4">
+  <a href="{{ prev_url }}" class="{{ prev_url and 'text-blue' or 'pointer-events-none cursor-not-allowed opacity-50 no-underline' }}">Newer posts</a>
+  <p class="font-bold">Page {{ request.args.get('page', 1) }}</p>
+  <a href="{{ next_url }}" class="{{ next_url and 'text-blue' or 'pointer-events-none cursor-not-allowed opacity-50 no-underline' }}">Older posts</a>
+</div>

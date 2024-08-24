@@ -1,37 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1 class="text-xl font-semibold mb-6">Register</h1>
-  <form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-      {{ form.username.label }}
-      {{ form.username(size=32) }}
-      {% for error in form.username.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    <p>
-      {{ form.email.label }}
-      {{ form.email(size=64) }}
-      {% for error in form.email.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    <p>
-      {{ form.password.label }}
-      {{ form.password(size=32) }}
-      {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    <p>
-      {{ form.password_confirmation.label }}
-      {{ form.password_confirmation(size=32) }}
-      {% for error in form.password_confirmation.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-  </form>
+  <div class="flex flex-col items-center">
+    <h1 class="text-xl font-semibold mb-6">Register</h1>
+    <form action="" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <div>
+        {{ form.username.label(class="text-m") }}<br>
+        {{ form.username(size=32, class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m") }}
+        <div class="h-5">
+          <span class="text-sm text-red">{{ "* {}".format(form.username.errors[0]) if form.username.errors[0] else '' }}</span>
+        </div>
+      </div>
+      <div>
+        {{ form.email.label(class="text-m") }}<br>
+        {{ form.email(size=64, class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m") }}
+        <div class="h-5">
+          <span class="text-sm text-red">{{ "* {}".format(form.email.errors[0]) if form.email.errors[0] else '' }}</span>
+        </div>
+      </div>
+      <div>
+        {{ form.password.label(class="text-m") }}<br>
+        {{ form.password(size=32, class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m") }}
+        <div class="h-5">
+          <span class="text-sm text-red">{{ "* {}".format(form.password.errors[0]) if form.password.errors[0] else '' }}</span>
+        </div>
+      </div>
+      <div class="mb-5">
+        {{ form.password_confirmation.label(class="text-m") }}<br>
+        {{ form.password_confirmation(size=32, class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m") }}
+        <div class="h-5">
+          <span class="text-sm text-red">{{ "* {}".format(form.password_confirmation.errors[0]) if form.password_confirmation.errors[0] else '' }}</span>
+        </div>
+      </div>
+      <div class="flex justify-center">{{ form.submit(class="min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m") }}</div>
+      <hr class="my-6 text-gray-light">
+      <p class="text-m">Already have an account? <a class="text-blue" href="{{ url_for('login') }}">Click to Login</a></p>
+    </form>
+  </div>
 {% endblock %}

@@ -18,4 +18,4 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['savchenko.konstantin.g@outlook.com']
 
-    POSTS_PER_PAGE = 20
+    POSTS_PER_PAGE = 5

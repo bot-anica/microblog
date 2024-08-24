@@ -3,22 +3,29 @@
 {% block content %}
   <h1 class="text-xl font-semibold mb-6">Hi, {{ current_user.username }}!</h1>
 
-  <form action="" method="post">
+  <form action="" method="post" novalidate>
     {{ form.hidden_tag() }}
-    <p>
-      {{ form.post.label }}<br>
-      {{ form.post(cols=32, rows=4) }}<br>
-      {% for error in form.post.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}
-    </p>
-    {{ form.submit() }}
+    <div>
+      {{ form.post.label(class="text-m") }}<br>
+      {{ form.post(cols=32, rows=4, class="w-96 px-4 py-2 rounded-md border border-gray-light text-gray-dark text-m resize-none") }}<br>
+      <div class="h-5">
+        <span class="text-sm text-red">{{ "* {}".format(form.post.errors[0]) if form.post.errors[0] else '' }}</span>
+      </div>
+    </div>
+    <div>{{ form.submit(class="min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m") }}</div>
   </form>
 
-  {% for post in posts %}
-    {% include "_post.html" %}
-  {% endfor %}
+  <hr class="my-6 text-gray-light">
 
-  <a href="{{ prev_url }}" class="{{ prev_url and 'link' or 'link_disabled' }}">Newer posts</a>
-  <a href="{{ next_url }}" class="{{ next_url and 'link' or 'link_disabled' }}">Older posts</a>
+  {% include "_pagination.html" %}
+
+  <ul class="flex flex-col gap-4 my-4">
+    {% for post in posts %}
+      <li>
+        {% include "_post.html" %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% include "_pagination.html" %}
 {% endblock %}

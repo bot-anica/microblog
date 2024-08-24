@@ -3,17 +3,21 @@
 {% endmacro %}
 
 <header class="px-8 py-4 shadow-md">
-  <div class="mx-auto flex items-center gap-20 max-w-7xl">
-    <span class="text-xl font-semibold">Microblog</span>
-
+  <div class="mx-auto max-w-7xl">
     <nav>
-      <ul class="flex gap-2">
+      <ul class="flex items-center gap-6">
+        <li class="mr-14">
+          <a class="text-xl font-semibold" href="{{ url_for('index') }}">Microblog</a>
+        </li>
         <li>
           <a class="{{ get_link_style('index') }}" href="{{ url_for('index') }}">Home</a>
         </li>
         {% if current_user.is_anonymous %}
-          <li>
+          <li class="ml-auto">
             <a class="{{ get_link_style('login') }}" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li>
+            <a class="{{ get_link_style('register') }}" href="{{ url_for('register') }}">Register</a>
           </li>
         {% else %}
           <li>
@@ -22,9 +26,9 @@
           <li>
             <a class="{{ get_link_style('user') }}" href="{{ url_for('user', username=current_user.username) }}">Profile</a>
           </li>
-          <li>
+          <li class="ml-auto">
             <a class="{{ get_link_style('logout') }}" href="{{ url_for('logout') }}">Logout</a>
-        </li>
+          </li>
         {% endif %}
       </ul>
     </nav>
