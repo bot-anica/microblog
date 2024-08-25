@@ -29,7 +29,7 @@
     <div>
       <div class="mb-4">
         <h1 class="text-xl font-bold">{{ user.username }}</h1>
-        {% if user.last_seen %}<p class="text-sm text-gray">Last seen on: {{ user.last_seen }}</p>{% endif %}
+        {% if user.last_seen %}<p class="text-sm text-gray">Last seen on: {{ moment(user.last_seen).format('LLL') }}</p>{% endif %}
       </div>
 
       {% if user.about_me %}
