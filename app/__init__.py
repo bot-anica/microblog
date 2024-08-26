@@ -14,8 +14,8 @@ from config import Config
 
 
 def get_locale():
-    # return request.accept_languages.best_match(app.config['LANGUAGES'])
-    return 'ru'
+    # return 'ru'
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 app = Flask(__name__)
 app.config.from_object(Config)
 app.app_context().push()
