@@ -41,4 +41,3 @@ app.db
 microblog.log*
 
 messages.pot
-translations

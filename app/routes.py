@@ -3,7 +3,8 @@ from sqlalchemy.sql import func
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from urllib.parse import urlparse
-from flask_babel import _
+from flask_babel import _, get_locale
+from flask import g
 
 from app import app, db
 from app.email import send_password_reset_email
@@ -17,6 +18,8 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = func.now()
         db.session.commit()
+
+    g.locale = str(get_locale())
 
 
 @app.route('/', methods=['GET', 'POST'])
