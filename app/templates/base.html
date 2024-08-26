@@ -1,9 +1,9 @@
 <html>
   <head>
     {% if title %}
-      <title>{{ title }} - Microblog</title>
+      <title>{{ _('%(title)s - Microblog', title=title) }}</title>
     {% else %}
-      <title>Welcome to Microblog</title>
+      <title>{{ _('Welcome to Microblog') }}</title>
     {% endif %}
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ url_for('static', filename='js/tailwind_config.js') }}"></script>

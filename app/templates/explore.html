@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="mb-6">
-    <h1 class="text-xl font-semibold mb-6">Hi, {{ current_user.username }}!</h1>
+    <h1 class="text-xl font-semibold mb-6">{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
 
     {% include "_pagination.html" %}
 

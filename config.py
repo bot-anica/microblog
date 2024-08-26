@@ -19,3 +19,5 @@ class Config(object):
     ADMINS = ['savchenko.konstantin.g@outlook.com']
 
     POSTS_PER_PAGE = 5
+
+    LANGUAGES = ['en', 'ru']

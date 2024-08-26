@@ -1,12 +1,12 @@
 <div class="flex flex-col gap-1 p-4 rounded-md bg-gray-lightest">
   <a class="flex gap-2 items-center text-blue" href="{{ url_for('user', username=post.author.username) }}">
     <div class="w-6 h-6">
-      <img style="border-radius: 50%" src="{{ post.author.avatar(24) }}" alt="{{ post.author.username }}'s avatar">
+      <img style="border-radius: 50%" src="{{ post.author.avatar(24) }}" alt="{{ _('%(username)s\'s avatar', username=post.author.username) }}">
     </div>
     {{ post.author.username }}
   </a>
 
-  <p>{{ post.body }}</p>
+  <p>{{ _('%(post_body)s', post_body=post.body) }}</p>
 
-  <p class="text-sm text-gray">{{ moment(post.timestamp).fromNow() }}</p>
+  <p class="text-sm text-gray">{{ _('%(post_timestamp)s', post_timestamp=moment(post.timestamp).fromNow()) }}</p>
 </div>

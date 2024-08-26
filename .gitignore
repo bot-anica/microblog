@@ -39,3 +39,5 @@ nosetests.xml
 .idea
 app.db
 microblog.log*
+
+messages.pot
