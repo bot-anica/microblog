@@ -7,17 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-26 23:31+0300\n"
-"PO-Revision-Date: 2024-08-26 23:37+0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: ru\n"
+"POT-Creation-Date: 2024-08-27 23:45+0300\n"
+"PO-Revision-Date: 2024-08-27 23:46+0300\n"
+"Last-Translator: \n"
 "Language-Team: ru <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 "
+"&& (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: app/__init__.py:28
 msgid "Please log in to access this page."
@@ -77,231 +78,217 @@ msgstr "Скажи что-нибудь"
 
 #: app/forms.py:59 app/forms.py:67
 msgid "Request Password Reset"
-msgstr ""
+msgstr "Запросить сброс пароля"
 
-#: app/routes.py:32
+#: app/routes.py:35
 msgid "Your post is now live!"
-msgstr ""
+msgstr "Ваш пост теперь доступен для просмотра!"
 
-#: app/routes.py:67
+#: app/routes.py:70
 msgid "Invalid username or password"
-msgstr ""
+msgstr "Неверное имя пользователя или пароль"
 
-#: app/routes.py:98
+#: app/routes.py:101
 msgid "Congratulations, you are now a registered user!"
-msgstr ""
+msgstr "Поздравляем, вы зарегистрированы!"
 
-#: app/routes.py:125
+#: app/routes.py:128
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Ваши изменения были сохранены."
 
-#: app/routes.py:139 app/routes.py:158
+#: app/routes.py:142 app/routes.py:161
 #, python-format
 msgid "User %(username)s not found."
-msgstr ""
+msgstr "Пользователь %(username)s не найден."
 
-#: app/routes.py:143
+#: app/routes.py:146
 msgid "You cannot follow yourself!"
-msgstr ""
+msgstr "Вы не можете подписаться на самого себя!"
 
-#: app/routes.py:148
+#: app/routes.py:151
 #, python-format
 msgid "You are following %(username)s!"
-msgstr ""
+msgstr "Вы подписаны на %(username)s!"
 
-#: app/routes.py:162
+#: app/routes.py:165
 msgid "You cannot unfollow yourself!"
-msgstr ""
+msgstr "Вы не можете отписаться от самого себя!"
 
-#: app/routes.py:167
+#: app/routes.py:170
 #, python-format
 msgid "You are not following %(username)s!"
-msgstr ""
+msgstr "Вы не подписаны на %(username)s!"
 
-#: app/routes.py:184
+#: app/routes.py:187
 msgid "Check your email for the instructions to reset your password."
 msgstr ""
+"Проверьте свою электронную почту, чтобы получить инструкции по восстановлению "
+"пароля."
 
-#: app/routes.py:205
+#: app/routes.py:208
 msgid "Your password has been reset."
-msgstr ""
+msgstr "Ваш пароль был изменен."
 
 #: app/templates/404.html:5
 msgid "File Not Found"
-msgstr ""
+msgstr "Файл не найден"
 
 #: app/templates/404.html:7 app/templates/500.html:8
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: app/templates/500.html:5
 msgid "An unexpected error has occurred"
-msgstr ""
+msgstr "Произошла непредвиденная ошибка"
 
 #: app/templates/500.html:6
 msgid "The administrator has been notified. Sorry for inconvenience!"
-msgstr ""
+msgstr "Администратор был уведомлен. Приносим извинения за неудобства!"
 
 #: app/templates/_header.html:10
 msgid "Microblog"
-msgstr ""
+msgstr "Микроблог"
 
 #: app/templates/_header.html:13
 msgid "Home"
-msgstr ""
+msgstr "Главная"
 
 #: app/templates/_header.html:17
 msgid "Login"
-msgstr ""
+msgstr "Войти"
 
 #: app/templates/_header.html:24
 msgid "Explore"
-msgstr ""
+msgstr "Все посты"
 
 #: app/templates/_header.html:27
 msgid "Profile"
-msgstr ""
+msgstr "Профиль"
 
 #: app/templates/_header.html:30
 msgid "Logout"
-msgstr ""
+msgstr "Выйти"
 
 #: app/templates/_pagination.html:2
 msgid "Newer posts"
-msgstr ""
+msgstr "Более новые посты"
 
 #: app/templates/_pagination.html:3
 #, python-format
 msgid "Page %(page_number)s"
-msgstr ""
+msgstr "Страница %(page_number)s"
 
 #: app/templates/_pagination.html:4
 msgid "Older posts"
-msgstr ""
+msgstr "Более старые посты"
 
 #: app/templates/_post.html:4
 #, python-format
 msgid "%(username)s's avatar"
-msgstr ""
-
-#: app/templates/_post.html:9
-#, python-format
-msgid "%(post_body)s"
-msgstr ""
-
-#: app/templates/_post.html:11
-#, python-format
-msgid "%(post_timestamp)s"
-msgstr ""
+msgstr "Аватар %(username)s"
 
 #: app/templates/base.html:4
 #, python-format
 msgid "%(title)s - Microblog"
-msgstr ""
+msgstr "%(title)s - Микроблог"
 
 #: app/templates/base.html:6
 msgid "Welcome to Microblog"
-msgstr ""
+msgstr "Добро пожаловать в Микроблог"
 
 #: app/templates/edit_profile.html:5
 msgid "Edit Profile"
-msgstr ""
+msgstr "Редактировать профиль"
 
 #: app/templates/explore.html:5 app/templates/index.html:5
 #, python-format
 msgid "Hi, %(username)s!"
-msgstr ""
+msgstr "Привет, %(username)s!"
 
 #: app/templates/login.html:25
 msgid "New User?"
-msgstr ""
+msgstr "Новый пользователь?"
 
 #: app/templates/login.html:25
 msgid "Click to Register!"
-msgstr ""
+msgstr "Зарегистрироваться!"
 
 #: app/templates/login.html:26
 msgid "Did you forget your password?"
-msgstr ""
+msgstr "Вы забыли свой пароль?"
 
 #: app/templates/login.html:26
 msgid "Click to reset it"
-msgstr ""
+msgstr "Сбросить его"
 
 #: app/templates/register.html:38
 msgid "Already have an account?"
-msgstr ""
+msgstr "У вас уже есть аккаунт?"
 
 #: app/templates/register.html:38
 msgid "Click to Login"
-msgstr ""
+msgstr "Нажмите, чтобы войти"
 
 #: app/templates/reset_password.html:5
 msgid "Reset Your Password"
-msgstr ""
+msgstr "Сбросить пароль"
 
 #: app/templates/reset_password_request.html:5
 msgid "Reset Password"
-msgstr ""
+msgstr "Сбросить пароль"
 
 #: app/templates/user.html:11
 #, python-format
 msgid "Last seen on: %(last_seen)s"
-msgstr ""
-
-#: app/templates/user.html:16
-#, python-format
-msgid "%(about_me)s"
-msgstr ""
+msgstr "Последний раз был: %(last_seen)s"
 
 #: app/templates/user.html:21
 msgid " followers"
-msgstr ""
+msgstr " подписчики"
 
 #: app/templates/user.html:22
 msgid " following"
-msgstr ""
+msgstr " подписан"
 
 #: app/templates/user.html:28
 msgid "Edit your profile"
-msgstr ""
+msgstr "Редактировать профиль"
 
 #: app/templates/user.html:32
 msgid "Follow"
-msgstr ""
+msgstr "Подписаться"
 
 #: app/templates/user.html:36
 msgid "Unfollow"
-msgstr ""
+msgstr "Отписаться"
 
 #: app/templates/email/reset_password.html:4
 #, python-format
 msgid "Dear %(username)s"
-msgstr ""
+msgstr "Уважаемый %(username)s"
 
 #: app/templates/email/reset_password.html:6
 msgid "To reset your password"
-msgstr ""
+msgstr "Чтобы сбросить пароль"
 
 #: app/templates/email/reset_password.html:8
 msgid "click here"
-msgstr ""
+msgstr "нажмите здесь"
 
 #: app/templates/email/reset_password.html:11
 msgid ""
-"Alternatively, you can paste the following link in your browser's address"
-" bar:"
+"Alternatively, you can paste the following link in your browser's address bar:"
 msgstr ""
+"Кроме того, вы можете вставить следующую ссылку в адресную строку браузера:"
 
 #: app/templates/email/reset_password.html:13
 msgid "If you have not requested a password reset simply ignore this message."
-msgstr ""
+msgstr "Если вы не запрашивали сброс пароля, просто проигнорируйте это сообщение."
 
 #: app/templates/email/reset_password.html:14
 msgid "Sincerely,"
-msgstr ""
+msgstr "С уважением,"
 
 #: app/templates/email/reset_password.html:15
 msgid "The Microblog Team"
-msgstr ""
-
+msgstr "Команда Микроблога"

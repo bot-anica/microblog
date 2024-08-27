@@ -6,7 +6,7 @@
     {{ post.author.username }}
   </a>
 
-  <p>{{ _('%(post_body)s', post_body=post.body) }}</p>
+  <p>{{ post.body }}</p>
 
-  <p class="text-sm text-gray">{{ _('%(post_timestamp)s', post_timestamp=moment(post.timestamp).fromNow()) }}</p>
+  <p class="text-sm text-gray">{{ moment(post.timestamp).fromNow() }}</p>
 </div>
