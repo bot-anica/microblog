@@ -34,7 +34,7 @@ tailwind.config = {
         'yellow-light': '#dfd674',
         'yellow': '#dfd02a',
         'yellow-dark': '#686102',
-        'gray-dark': '#273444',
+        'gray-dark': '#4e5c6e',
         'gray': '#8492a6',
         'gray-light': '#d3dce6',
         'gray-lightest': '#eff9ff',

@@ -21,3 +21,5 @@ class Config(object):
     POSTS_PER_PAGE = 5
 
     LANGUAGES = ['en', 'ru']
+
+    DEEPL_TRANSLATOR_KEY = os.environ.get('DEEPL_TRANSLATOR_KEY')

@@ -6,7 +6,24 @@
     {{ post.author.username }}
   </a>
 
-  <p>{{ post.body }}</p>
+  <p id="post{{ post.id }}">{{ post.body }}</p>
+
+  {% if post.language and post.language != g.local %}
+    <a id="post{{ post.id }}_translation_handler" class="text-xs text-blue" href="javascript:translate(
+                          '#post{{ post.id }}',
+                          '#post{{ post.id }}_translation_handler',
+                          '#post{{ post.id }}_show_original_handler',
+                          '{{ post.language }}',
+                          '{{ g.locale }}');">{{ _('Translate') }}</a>
+  {% endif %}
+
+  {% if post.language and post.language != g.local %}
+    <a id="post{{ post.id }}_show_original_handler" class="text-xs text-blue hidden" href="javascript:show_original_text(
+                          '#post{{ post.id }}',
+                          '#post{{ post.id }}_translation_handler',
+                          '#post{{ post.id }}_show_original_handler',
+                          '{{ post.body }}');">{{ _('Show original text') }}</a>
+  {% endif %}
 
   <p class="text-sm text-gray">{{ moment(post.timestamp).fromNow() }}</p>
 </div>

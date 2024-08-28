@@ -1,16 +1,17 @@
 from sqlalchemy.sql import func
 
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, g, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from urllib.parse import urlparse
 from flask_babel import _, get_locale
-from flask import g
+from langdetect import detect, LangDetectException
 
 from app import app, db
 from app.email import send_password_reset_email
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, \
     ResetPasswordForm
 from app.models import User, Post
+from app.translate import translate
 
 
 @app.before_request
@@ -29,7 +30,12 @@ def index():
     form = PostForm()
 
     if form.validate_on_submit():
-        post = Post(body=form.post.data, author=current_user)
+        try:
+            language = detect(form.post.data)
+        except LangDetectException:
+            language = ''
+
+        post = Post(body=form.post.data, author=current_user, language=language)
         db.session.add(post)
         db.session.commit()
         flash(_('Your post is now live!'), 'info')
@@ -210,3 +216,15 @@ def reset_password(token):
 
     return render_template('reset_password.html', form=form)
 
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    data = request.get_json()
+
+    print(f"{data = }")
+
+    return jsonify({'text': translate(
+        data['text'],
+        data['source_language'],
+        data['target_language'])})

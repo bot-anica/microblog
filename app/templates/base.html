@@ -24,4 +24,38 @@
 {% block scripts %}
   {{ moment.include_moment() }}
   {{ moment.lang(g.locale) }}
+
+  <script>
+    async function translate(sourceElem, translationHandlerElem, showOriginalHandlerElem, sourceLang, targetLang) {
+      const sourceElement = document.querySelector(sourceElem);
+      const originalText = sourceElement.innerText;
+
+      sourceElement.innerHTML = '<img src="{{ url_for('static', filename='loading.gif') }}">';
+
+      const response = await fetch('/translate', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        body: JSON.stringify({
+          text: originalText,
+          source_language: sourceLang,
+          target_language: targetLang
+        })
+      })
+
+      const data = await response.json();
+
+      console.log(data)
+
+      document.querySelector(sourceElem).innerText = data.text;
+      document.querySelector(translationHandlerElem).classList.add('hidden');
+      document.querySelector(showOriginalHandlerElem).classList.remove('hidden');
+    }
+
+    function show_original_text(sourceElem, translationHandlerElem, showOriginalHandlerElem, original_text) {
+      console.log({sourceElem, translationHandlerElem, showOriginalHandlerElem, original_text})
+      document.querySelector(sourceElem).innerText = original_text;
+      document.querySelector(translationHandlerElem).classList.remove('hidden');
+      document.querySelector(showOriginalHandlerElem).classList.add('hidden');
+    }
+  </script>
 {% endblock %}
