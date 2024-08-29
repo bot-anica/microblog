@@ -1,22 +1,26 @@
 import unittest
 from datetime import timedelta, datetime, timezone
 
-from sqlalchemy.sql import func
+from flask import current_app
 
-from app import app, db
+from app import db, create_app
 from app.models import User, Post
+from tests_config import TestConfig
 
 
 class UserModelCase(unittest.TestCase):
     # Функция setUp выполняется перед запуском каждого теста
     def setUp(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()  # создает все таблицы базы данных
 
     # Функция tearDown выполняется после запуска каждого теста
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_password_hashing(self):
         u = User(username='susan')
@@ -69,7 +73,7 @@ class UserModelCase(unittest.TestCase):
         db.session.add_all([p1, p2, p3, p4])
         db.session.commit()
 
-        # setup the followers
+        # set up the followers
         u1.follow(u2)  # john follows susan
         u1.follow(u4)  # john follows david
         u2.follow(u3)  # susan follows mary

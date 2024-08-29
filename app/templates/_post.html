@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-1 p-4 rounded-md bg-gray-lightest">
-  <a class="flex gap-2 items-center text-blue" href="{{ url_for('user', username=post.author.username) }}">
+  <a class="flex gap-2 items-center text-blue" href="{{ url_for('main.user', username=post.author.username) }}">
     <div class="w-6 h-6">
       <img style="border-radius: 50%" src="{{ post.author.avatar(24) }}" alt="{{ _('%(username)s\'s avatar', username=post.author.username) }}">
     </div>

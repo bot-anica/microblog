@@ -22,8 +22,8 @@
       <div class="flex items-center gap-2 mb-5">{{ form.remember_me(class="w-4 h-4") }} {{ form.remember_me.label(class="text-m") }}</div>
       <div class="flex justify-center">{{ form.submit(class="min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m") }}</div>
       <hr class="my-6 text-gray-light">
-      <p class="text-m mb-2">{{ _('New User?') }} <a class="text-blue" href="{{ url_for('register') }}">{{ _('Click to Register!') }}</a></p>
-      <p class="text-m">{{ _('Did you forget your password?') }} <a class="text-blue" href="{{ url_for('reset_password_request') }}">{{ _('Click to reset it') }}</a></p>
+      <p class="text-m mb-2">{{ _('New User?') }} <a class="text-blue" href="{{ url_for('auth.register') }}">{{ _('Click to Register!') }}</a></p>
+      <p class="text-m">{{ _('Did you forget your password?') }} <a class="text-blue" href="{{ url_for('auth.reset_password_request') }}">{{ _('Click to reset it') }}</a></p>
     </form>
   </div>
 {% endblock %}

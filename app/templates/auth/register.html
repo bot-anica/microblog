@@ -35,7 +35,7 @@
       </div>
       <div class="flex justify-center">{{ form.submit(class="min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m") }}</div>
       <hr class="my-6 text-gray-light">
-      <p class="text-m">{{ _('Already have an account?') }} <a class="text-blue" href="{{ url_for('login') }}">{{ _('Click to Login') }}</a></p>
+      <p class="text-m">{{ _('Already have an account?') }} <a class="text-blue" href="{{ url_for('auth.login') }}">{{ _('Click to Login') }}</a></p>
     </form>
   </div>
 {% endblock %}

@@ -41,3 +41,5 @@ app.db
 microblog.log*
 
 messages.pot
+
+.evn

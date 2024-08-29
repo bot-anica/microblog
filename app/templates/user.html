@@ -24,15 +24,15 @@
 
       <div class="flex">
         {% if user == current_user %}
-          <a href="{{ url_for('edit_profile') }}">
+          <a href="{{ url_for('main.edit_profile') }}">
             <div class="text-center min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m">{{ _('Edit your profile') }}</div>
           </a>
         {% elif not current_user.is_following(user) %}
-          <a href="{{ url_for('follow', username=user.username) }}">
+          <a href="{{ url_for('main.follow', username=user.username) }}">
             <div class="text-center min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m">{{ _('Follow') }}</div>
           </a>
         {% else %}
-          <a href="{{ url_for('unfollow', username=user.username) }}">
+          <a href="{{ url_for('main.unfollow', username=user.username) }}">
             <div class="text-center min-w-40 bg-blue-light text-blue-dark rounded-md px-4 py-1 text-m">{{ _('Unfollow') }}</div>
           </a>
         {% endif %}
