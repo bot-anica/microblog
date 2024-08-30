@@ -24,9 +24,18 @@
             <a class="{{ get_link_style('explore') }}" href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a>
           </li>
           <li>
-            <a class="{{ get_link_style('user') }}" href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a>
+            {% if g.search_form %}
+              <form class="mb-0" action="{{ url_for('main.search') }}" method="get" novalidate>
+                <div>
+                  {{ g.search_form.q(size=32, class="w-60 px-2 py-1 rounded-md border border-gray-light text-gray-dark text-m placeholder-gray", placeholder=g.search_form.q.label.text) }}
+                </div>
+              </form>
+            {% endif %}
           </li>
           <li class="ml-auto">
+            <a class="{{ get_link_style('user') }}" href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a>
+          </li>
+          <li>
             <a class="{{ get_link_style('logout') }}" href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
           </li>
         {% endif %}

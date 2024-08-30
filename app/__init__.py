@@ -12,6 +12,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
 
+from elasticsearch import Elasticsearch
+
 
 def get_locale():
     # return 'ru'
@@ -41,6 +43,8 @@ def create_app(config_class=Config):
     mail.init_app(app)
     moment.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
+
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

@@ -1,3 +1,4 @@
+from flask import request
 from flask_babel import lazy_gettext as _l
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, SubmitField, TextAreaField
@@ -25,3 +26,18 @@ class EditProfileForm(FlaskForm):
 class PostForm(FlaskForm):
     post = TextAreaField(_l('Say something'), validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField(_l('Submit'))
+
+
+class SearchForm(FlaskForm):
+    q = StringField(_l('Search'), validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        # проверяем переданы ли в запросе значения для аргументов 'formdata' и 'csrf_enabled'
+        # если нет, то устанавливаем значения по умолчанию
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'meta' not in kwargs:
+            kwargs['meta'] = {'csrf': False}
+
+        # вызываем конструктор родительского класса с переданными аргументами
+        super(SearchForm, self).__init__(*args, **kwargs)

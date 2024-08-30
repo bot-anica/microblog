@@ -25,3 +25,4 @@ class Config(object):
     LANGUAGES = ['en', 'ru']
 
     DEEPL_TRANSLATOR_KEY = os.environ.get('DEEPL_TRANSLATOR_KEY')
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')

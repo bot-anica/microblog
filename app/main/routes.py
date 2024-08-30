@@ -7,7 +7,7 @@ from langdetect import detect, LangDetectException
 
 from app import db
 from app.main import bp
-from app.main.forms import EditProfileForm, PostForm
+from app.main.forms import EditProfileForm, PostForm, SearchForm
 from app.models import User, Post
 from app.translate import translate
 
@@ -17,6 +17,7 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.now(timezone.utc)
         db.session.commit()
+        g.search_form = SearchForm()
 
     g.locale = str(get_locale())
 
@@ -137,9 +138,23 @@ def unfollow(username):
 def translate_text():
     data = request.get_json()
 
-    print(f"{data = }")
-
     return jsonify({'text': translate(
         data['text'],
         data['source_language'],
         data['target_language'])})
+
+
+@bp.route('/search')
+@login_required
+def search():
+    if not g.search_form.validate():
+        return redirect(url_for('main.explore'))
+
+    page = request.args.get('page', 1, type=int)
+    posts, total = Post.search(g.search_form.q.data, page,
+                               current_app.config['POSTS_PER_PAGE'])
+    next_url = url_for('main.search', q=g.search_form.q.data, page=page+1) \
+        if total > page * current_app.config['POSTS_PER_PAGE'] else None
+    prev_url = url_for('main.search', q=g.search_form.q.data, page=page-1) \
+        if page > 1 else None
+    return render_template('search.html', title='Search', query=g.search_form.q.data, posts=posts, next_url=next_url, prev_url=prev_url)
