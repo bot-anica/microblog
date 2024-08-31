@@ -2,6 +2,7 @@ import logging
 import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 
+from elasticsearch import Elasticsearch
 from flask import Flask, request, current_app
 from flask_babel import Babel, lazy_gettext as _l
 from flask_login import LoginManager
@@ -11,8 +12,6 @@ from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 
 from config import Config
-
-from elasticsearch import Elasticsearch
 
 
 def get_locale():
@@ -35,7 +34,6 @@ babel = Babel()
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    app.app_context().push()
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -59,21 +57,21 @@ def create_app(config_class=Config):
     app.register_blueprint(cli_bp)
 
     if not app.debug and not app.testing:
-        if current_app.config['MAIL_SERVER']:
+        if app.config['MAIL_SERVER']:
             auth = None
 
-            if current_app.config['MAIL_USERNAME'] or current_app.config['MAIL_PASSWORD']:
-                auth = (current_app.config['MAIL_USERNAME'], current_app.config['MAIL_PASSWORD'])
+            if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
+                auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
 
             secure = None
 
-            if current_app.config['MAIL_USE_TLS']:
+            if app.config['MAIL_USE_TLS']:
                 secure = ()
 
             mail_handler = SMTPHandler(
-                mailhost=(current_app.config['MAIL_SERVER'], current_app.config['MAIL_PORT']),
-                fromaddr='no-reply@' + current_app.config['MAIL_SERVER'],
-                toaddrs=current_app.config['ADMINS'],
+                mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+                fromaddr='no-reply@' + app.config['MAIL_SERVER'],
+                toaddrs=app.config['ADMINS'],
                 subject='Microblog Failure',
                 credentials=auth,
                 secure=secure
