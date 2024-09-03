@@ -243,3 +243,52 @@ pybabel update -i messages.pot -d app/translations
 flask translate update
 ```
 , если эта команда описана в файле app/cli.py, как в моём случае.
+
+---
+## Развертывание под Linux
+
+### Создание сервера Ubuntu
+
+Чтобы создать сервер, выполните следующую команду:
+
+```shell
+vagrant up
+```
+
+### Использование SSH-клиента
+
+Если вы используете Vagrant VM, вы можете открыть сеанс терминала с помощью команды:
+
+```shell
+vagrant ssh
+```
+
+### Работа с приложением
+
+Переходим в проект:
+
+```shell
+cd microblog
+```
+
+Создаём виртуальную среду:
+
+```shell
+python3 -m venv venv
+```
+
+```shell
+source venv/bin/activate
+```
+
+### Настройка Gunicorn и Supervisor
+
+Для запуска Микроблога под gunicorn вы можете использовать следующую команду:
+
+```shell
+gunicorn -b localhost:8000 -w 4 microblog:app
+```
+
+
+
+

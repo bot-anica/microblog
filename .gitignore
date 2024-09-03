@@ -43,3 +43,4 @@ microblog.log*
 messages.pot
 
 .evn
+.vagrant
