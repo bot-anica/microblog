@@ -144,7 +144,7 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
 
 
-class Post(SearchableMixin, db.Model):
+class Post(db.Model):
     __searchable__ = ["body"]  # variable that say which fields should be indexed for search using Elasticsearch
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
