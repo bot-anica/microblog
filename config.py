@@ -26,3 +26,4 @@ class Config(object):
 
     DEEPL_TRANSLATOR_KEY = os.environ.get('DEEPL_TRANSLATOR_KEY')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    ELASTICSEARCH_API_KEY = os.environ.get('ELASTICSEARCH_API_KEY')

@@ -30,6 +30,8 @@ mail = Mail()
 moment = Moment()
 babel = Babel()
 
+elasticsearch_config = []
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -42,7 +44,7 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app, locale_selector=get_locale)
 
-    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']], api_key=app.config['ELASTICSEARCH_API_KEY']) if app.config['ELASTICSEARCH_URL'] else None
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
