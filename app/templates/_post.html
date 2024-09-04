@@ -8,7 +8,7 @@
 
   <p id="post{{ post.id }}">{{ post.body }}</p>
 
-  {% if post.language and post.language != g.local %}
+  {% if post.language and post.language != g.locale %}
     <a id="post{{ post.id }}_translation_handler" class="text-xs text-blue" href="javascript:translate(
                           '#post{{ post.id }}',
                           '#post{{ post.id }}_translation_handler',
@@ -17,7 +17,7 @@
                           '{{ g.locale }}');">{{ _('Translate') }}</a>
   {% endif %}
 
-  {% if post.language and post.language != g.local %}
+  {% if post.language and post.language != g.locale %}
     <a id="post{{ post.id }}_show_original_handler" class="text-xs text-blue hidden" href="javascript:show_original_text(
                           '#post{{ post.id }}',
                           '#post{{ post.id }}_translation_handler',
