@@ -289,6 +289,21 @@ source venv/bin/activate
 gunicorn -b localhost:8000 -w 4 microblog:app
 ```
 
+---
+## Деплой приложения
 
+Я использовал:
 
+1. База данных (**[render.com -> PostgreSQL](https://dashboard.render.com/new/database)**):
+   - Необходимо задеплоить базу данных
+   - Сохранить в DATABASE_URL ссылку на базу данных
+   - Подключится к ней локально используя Database инструмент в правом сайдбаре PyCharm, указав все параметры базы данных, которую только что создали
+   - Используя `flask shell` и затем `db.create_all()` создайте таблицы в базе данных
 
+2. Elasticsearch (**[elastic.co -> Elasticsearch](https://www.elastic.co/products/elasticsearch)** **Free Trial - 14 days**):
+   - Сохраняем в переменную окружения `ELASTICSEARCH_URL` ссылку на Elasticsearch
+   - Сохраняем в переменную окружения `ELASTICSEARCH_API_KEY` ключ API для Elasticsearch
+
+3. Деплой приложения (**[render.com -> Web Service](https://dashboard.render.com/web/new)**)
+
+Для полноценного прода лучше использовать Heroku для всех 3 составляющих - дешевле выйдет.
