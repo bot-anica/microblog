@@ -307,3 +307,67 @@ gunicorn -b localhost:8000 -w 4 microblog:app
 3. Деплой приложения (**[render.com -> Web Service](https://dashboard.render.com/web/new)**)
 
 Для полноценного прода лучше использовать Heroku для всех 3 составляющих - дешевле выйдет.
+
+---
+## Запуск Elasticsearch используя Docker:
+```shell
+docker run --name elasticsearch -d --rm -p 9200:9200 \
+    --memory="1GB" \
+    -e discovery.type=single-node -e xpack.security.enabled=false \
+    -t docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+```
+
+После этого нужно синхронизировать БД и Elasticsearch. Для этого нужно проиндексировать все элементы, для которых должен быть доступен поиск. Для этого запускаем flask shell:
+```shell
+flask shell
+```
+и у всех классов, для которых доступен поиск, вызываем метод reindex():
+```
+Post.reindex()
+```
+
+---
+## Развертывание на Docker контейнерах
+
+Вот команда docker run, которая запускает сервер MySQL:
+
+```shell
+docker run --name mysql -d -e MYSQL_RANDOM_ROOT_PASSWORD=yes \
+    -e MYSQL_DATABASE=microblog -e MYSQL_USER=microblog \
+    -e MYSQL_PASSWORD=<password> \
+    --network microblog-network \
+    mysql:latest
+```
+
+В документации Elasticsearch для Docker представлен вариант запуска службы единым узлом для разработки и развертывания, готовый к работе с двумя узлами (two-node). Сейчас я собираюсь запустить docker с опцией single-node и использовать образ "oss", который имеет только движок с открытым исходным кодом. Контейнер запускается следующей командой:
+
+```shell
+docker run --name elasticsearch -d --rm -p 9200:9200 \
+    -e discovery.type=single-node -e xpack.security.enabled=false \
+    --network microblog-network \
+    -t docker.elastic.co/elasticsearch/elasticsearch:8.15.0
+```
+
+Теперь, когда у меня работает служба Elasticsearch, я могу изменить команду запуска для моего контейнера Microblog, чтобы создать ссылку на неё и установить URL службы Elasticsearch, но сначала нужно выполнить команду:
+
+```shell
+flask db stamp head
+```
+
+чтобы сделает базу данных синхронизированной с head миграцией, а затем обновление применит последнюю миграцию. И уже после этого запускаем сервер Microblog:
+
+```shell
+docker run --name microblog -d -p 8000:5000 --rm -e SECRET_KEY=<secret_key> \
+-e MAIL_SERVER=<mail_server> -e MAIL_PORT=587 -e MAIL_USE_TLS=1 \
+-e MAIL_USERNAME=<mail_username> -e MAIL_PASSWORD=<mail_password> \
+--network microblog-network \
+-e DATABASE_URL=mysql+pymysql://microblog:<db_password>>@mysql/microblog \
+-e ELASTICSEARCH_URL=http://elasticsearch:9200 microblog:latest
+```
+
+Используя следующую команду мы можем смотреть логи ошибок запущенных в фоне Docker контейнеров:
+
+```shell
+docker logs microblog
+```
+
