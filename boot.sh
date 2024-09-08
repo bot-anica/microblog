@@ -1,6 +1,8 @@
 #!/bin/bash
 while true; do
     echo Try to upgrade database...
+    flask db stamp head
+    flask db migrate
     flask db upgrade
     if [[ "$?" == "0" ]]; then
         break
